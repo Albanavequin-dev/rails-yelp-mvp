@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><%= @restaurant.name %></h1>
+    <%= link_to edit_restaurant_path(@restaurant.id), class: 'btn btn-light btn-sm border' do %>
+      <i class="fa fa-pencil"></i> Edit this restaurant
+    <% end %>
+  </div>
+
+  <p>
+ <div class="container mt-5">
+  <%= @restaurant.address %><br>
+  <%= @restaurant.phone_number %><br>
+  <%= @restaurant.category %>
+  </p>
+
+  <h2>Reviews : 📝</h2>
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text"><%= review.rating %> ⭐️</p>
+        <p class="card-text"><%= review.content %></p>
+      </div>
+    </div>
+  <% end %>
+
+<div class="container mt-5">
+ <h1>Post your Review !</h1>
+
+<%= simple_form_for [@restaurant, @review] do |f| %>
+  <div class="form-group">
+      <%= f.input :rating %>
+    </div>
+
+  <div class="form-group">
+      <%= f.input :content %>
+    </div>
+
+    <%= f.submit class: 'btn btn-primary mt-3' %>
+<% end %>
+</div>
+
+  <hr>
+  <%= link_to restaurants_path do %>
+    <i class="fa-solid fa-arrow-rotate-left"></i> Back to list
+  <% end %>
